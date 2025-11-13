@@ -187,7 +187,12 @@ abstract class BaseSimpleActivity : EdgeToEdgeActivity() {
         WindowCompat.enableEdgeToEdge(window)
         registerBackPressedCallback()
 
-        if (!packageName.startsWith("org.fossify.", true)) {
+        val allowedPrefixes = listOf(
+            "org.fossify.",
+            "cn.com.techvision.",
+            "ai.lincos."
+        )
+        if (allowedPrefixes.none { packageName.startsWith(it, true) }) {
             if ((0..50).random() == 10 || baseConfig.appRunCount % 100 == 0) {
                 showModdedAppWarning()
             }

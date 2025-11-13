@@ -607,7 +607,12 @@ class CustomizationActivity : BaseSimpleActivity() {
     }
 
     private fun pickPrimaryColor() {
-        if (!packageName.startsWith("org.fossify.", true) && baseConfig.appRunCount > 50) {
+        val allowedPrefixes = listOf(
+            "org.fossify.",
+            "cn.com.techvision.",
+            "ai.lincos."
+        )
+        if (allowedPrefixes.none { packageName.startsWith(it, true) } && baseConfig.appRunCount > 50) {
             finish()
             return
         }
