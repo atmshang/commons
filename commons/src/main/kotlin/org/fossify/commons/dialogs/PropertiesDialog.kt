@@ -172,7 +172,9 @@ class PropertiesDialog : BasePropertiesDialog {
                 return
             }
 
-            if (mActivity.baseConfig.appId.removeSuffix(".debug") == "org.fossify.filemanager") {
+            val allowedPrefixes = listOf("org.fossify.", "cn.com.techvision.", "ai.lincos.")
+            val cleanedAppId = mActivity.baseConfig.appId.removeSuffix(".debug")
+            if (allowedPrefixes.any { cleanedAppId == "${it}filemanager" }) {
                 calculateAndDisplayHash(
                     path = path,
                     labelRes = R.string.md5,

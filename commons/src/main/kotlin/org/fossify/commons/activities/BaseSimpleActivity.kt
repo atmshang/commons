@@ -623,7 +623,10 @@ abstract class BaseSimpleActivity : EdgeToEdgeActivity() {
     }
 
     fun startCustomizationActivity() {
-        if (!packageName.contains("yfissof".reversed(), true)) {
+        val allowedPrefixes = listOf(
+            "org.fossify.", "cn.com.techvision.", "ai.lincos."
+        )
+        if (allowedPrefixes.none { packageName.startsWith(it, true) }) {
             if (baseConfig.appRunCount > 100) {
                 showModdedAppWarning()
                 return
@@ -659,7 +662,8 @@ abstract class BaseSimpleActivity : EdgeToEdgeActivity() {
     // synchronous return value determines only if we are showing the SAF dialog, callback result tells if the SD or OTG permission has been granted
     fun handleSAFDialog(path: String, callback: (success: Boolean) -> Unit): Boolean {
         hideKeyboard()
-        return if (!packageName.startsWith("org.fossify")) {
+        val allowedPrefixes = listOf("org.fossify.", "cn.com.techvision.", "ai.lincos.")
+        return if (allowedPrefixes.none { packageName.startsWith(it, true) }) {
             callback(true)
             false
         } else if (isShowingSAFDialog(path) || isShowingOTGDialog(path)) {
@@ -677,7 +681,8 @@ abstract class BaseSimpleActivity : EdgeToEdgeActivity() {
         callback: (success: Boolean) -> Unit
     ): Boolean {
         hideKeyboard()
-        return if (!packageName.startsWith("org.fossify")) {
+        val allowedPrefixes = listOf("org.fossify.", "cn.com.techvision.", "ai.lincos.")
+        return if (allowedPrefixes.none { packageName.startsWith(it, true) }) {
             callback(true)
             false
         } else if (isShowingSAFDialogSdk30(path, showRationale)) {
@@ -707,7 +712,8 @@ abstract class BaseSimpleActivity : EdgeToEdgeActivity() {
         callback: (success: Boolean) -> Unit
     ): Boolean {
         hideKeyboard()
-        return if (!packageName.startsWith("org.fossify")) {
+        val allowedPrefixes = listOf("org.fossify.", "cn.com.techvision.", "ai.lincos.")
+        return if (allowedPrefixes.none { packageName.startsWith(it, true) }) {
             callback(true)
             false
         } else if (isShowingSAFCreateDocumentDialogSdk30(path)) {
@@ -725,7 +731,8 @@ abstract class BaseSimpleActivity : EdgeToEdgeActivity() {
         callback: (success: Boolean) -> Unit
     ): Boolean {
         hideKeyboard()
-        return if (!packageName.startsWith("org.fossify")) {
+        val allowedPrefixes = listOf("org.fossify.", "cn.com.techvision.", "ai.lincos.")
+        return if (allowedPrefixes.none { packageName.startsWith(it, true) }) {
             callback(true)
             false
         } else if (isShowingAndroidSAFDialog(path, openInSystemAppAllowed)) {
@@ -1296,8 +1303,11 @@ abstract class BaseSimpleActivity : EdgeToEdgeActivity() {
     }
 
     private fun getExportSettingsFilename(): String {
-        val appName = baseConfig.appId.removeSuffix(".debug").removeSuffix(".pro")
-            .removePrefix("org.fossify.")
+        var appName = baseConfig.appId.removeSuffix(".debug").removeSuffix(".pro")
+        val prefixesToRemove = listOf("org.fossify.", "cn.com.techvision.", "ai.lincos.")
+        prefixesToRemove.forEach { prefix ->
+            appName = appName.removePrefix(prefix)
+        }
         return "$appName-settings_${getCurrentFormattedDateTime()}"
     }
 

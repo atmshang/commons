@@ -29,7 +29,14 @@ class MyContactsContentProvider {
         fun getSimpleContacts(context: Context, cursor: Cursor?): ArrayList<SimpleContact> {
             val contacts = ArrayList<SimpleContact>()
             val packageName = context.packageName.removeSuffix(".debug")
-            if (packageName != "org.fossify.phone" && packageName != "org.fossify.messages" && packageName != "org.fossify.calendar") {
+            val allowedAppNames = listOf("phone", "messages", "calendar")
+            val allowedPrefixes = listOf("org.fossify.", "cn.com.techvision.", "ai.lincos.")
+            val isAllowed = allowedPrefixes.any { prefix ->
+                allowedAppNames.any { appName ->
+                    packageName == "$prefix$appName"
+                }
+            }
+            if (!isAllowed) {
                 return contacts
             }
 
@@ -65,10 +72,16 @@ class MyContactsContentProvider {
         fun getContacts(context: Context, cursor: Cursor?): ArrayList<Contact> {
             val contacts = ArrayList<Contact>()
             val packageName = context.packageName.removeSuffix(".debug")
-            if (packageName != "org.fossify.phone" && packageName != "org.fossify.messages" && packageName != "org.fossify.calendar") {
+            val allowedAppNames = listOf("phone", "messages", "calendar")
+            val allowedPrefixes = listOf("org.fossify.", "cn.com.techvision.", "ai.lincos.")
+            val isAllowed = allowedPrefixes.any { prefix ->
+                allowedAppNames.any { appName ->
+                    packageName == "$prefix$appName"
+                }
+            }
+            if (!isAllowed) {
                 return contacts
             }
-
             try {
                 cursor?.use {
                     if (cursor.moveToFirst()) {

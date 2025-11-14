@@ -618,9 +618,11 @@ fun Activity.openPathIntent(
             setDataAndType(newUri, mimeType)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
 
-            if (applicationId == "org.fossify.gallery" || applicationId == "org.fossify.gallery.debug") {
+            val allowedPrefixes = listOf("org.fossify.", "cn.com.techvision.", "ai.lincos.")
+            if (allowedPrefixes.any { applicationId.startsWith("${it}gallery") }) {
                 putExtra(IS_FROM_GALLERY, true)
             }
+
 
             for ((key, value) in extras) {
                 putExtra(key, value)
@@ -661,10 +663,13 @@ fun BaseSimpleActivity.launchCallIntent(recipient: String, handle: PhoneAccountH
             }
 
             if (isDefaultDialer()) {
-                val packageName = if (baseConfig.appId.contains(".debug", true)) "org.fossify.phone.debug" else "org.fossify.phone"
-                val className = "org.fossify.phone.activities.DialerActivity"
+                // 假设 appId 是类似 "cn.com.techvision.phone"
+                val basePackage = baseConfig.appId.removeSuffix(".pro").removeSuffix(".debug")
+                val packageName = if (baseConfig.appId.contains(".debug", true)) "$basePackage.debug" else basePackage
+                val className = "$basePackage.activities.DialerActivity"
                 setClassName(packageName, className)
             }
+
 
             launchActivityIntent(this)
         }

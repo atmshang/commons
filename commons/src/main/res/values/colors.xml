@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">@color/md_green_900</color>
-    <color name="color_primary_dark">@color/md_green_200_dark</color>
-    <color name="color_accent">@color/color_primary</color>
+    <color name="color_primary">#FF217AFF</color>
+    <color name="color_primary_dark">#FF006DFF</color>
+    <color name="color_accent">#FF217AFF</color>
 
     <color name="pressed_item_foreground">#08000000</color>
     <color name="activated_item_foreground">#44888888</color>

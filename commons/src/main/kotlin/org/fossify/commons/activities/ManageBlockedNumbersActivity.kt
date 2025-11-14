@@ -86,8 +86,9 @@ class ManageBlockedNumbersActivity : BaseSimpleActivity() {
             val isBlockingHiddenNumbers by config.isBlockingHiddenNumbers.collectAsStateWithLifecycle(initialValue = config.blockHiddenNumbers)
             val isBlockingUnknownNumbers by config.isBlockingUnknownNumbers.collectAsStateWithLifecycle(initialValue = config.blockUnknownNumbers)
             val showCheckmarksOnSwitches by config.showCheckmarksOnSwitchesFlow.collectAsStateWithLifecycle(initialValue = config.showCheckmarksOnSwitches)
+            val allowedPrefixes = listOf("org.fossify.", "cn.com.techvision.", "ai.lincos.")
             val isDialer = remember {
-                config.appId.startsWith("org.fossify.phone")
+                allowedPrefixes.any { config.appId.startsWith("${it}phone") }
             }
             val isDefaultDialer: Boolean = onEventValue {
                 context.isDefaultDialer()
@@ -220,7 +221,8 @@ class ManageBlockedNumbersActivity : BaseSimpleActivity() {
     }
 
     private fun maybeSetDefaultCallerIdApp() {
-        if (isQPlus() && baseConfig.appId.startsWith("org.fossify.phone")) {
+        val allowedPrefixes = listOf("org.fossify.", "cn.com.techvision.", "ai.lincos.")
+        if (isQPlus() && allowedPrefixes.any { baseConfig.appId.startsWith("${it}phone") }) {
             setDefaultCallerIdApp()
         }
     }
