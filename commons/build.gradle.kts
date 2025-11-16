@@ -111,7 +111,7 @@ afterEvaluate {
         // --- 您可以自定义这里的坐标 ---
         groupId = "cn.com.techvision"  // 你的组织/公司ID
         artifactId = "commons"         // 你的库名称
-        version = "1.0.5-LOCAL"        // 你的版本号，用-LOCAL后缀表示是本地构建版
+        version = "1.0.6-LOCAL"        // 你的版本号，用-LOCAL后缀表示是本地构建版
     }
 }
 

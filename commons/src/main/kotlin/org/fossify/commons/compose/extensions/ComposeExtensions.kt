@@ -162,12 +162,3 @@ internal fun TransparentSystemBars(darkIcons: Boolean = !isSystemInDarkTheme()) 
         onDispose { }
     }
 }
-
-@Composable
-fun composeDonateIntent(): () -> Unit {
-    val localContext = LocalContext.current
-    val localView = LocalView.current
-    return {
-        if (localView.isInEditMode) Unit else localContext.getActivity().launchViewIntent(R.string.thank_you_url)
-    }
-}

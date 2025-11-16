@@ -42,7 +42,6 @@ import androidx.fragment.app.FragmentActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.fossify.commons.R
 import org.fossify.commons.activities.BaseSimpleActivity
-import org.fossify.commons.compose.extensions.DEVELOPER_PLAY_STORE_URL
 import org.fossify.commons.databinding.DialogTitleBinding
 import org.fossify.commons.dialogs.AppSideloadedDialog
 import org.fossify.commons.dialogs.ConfirmationAdvancedDialog
@@ -132,14 +131,6 @@ fun Activity.appLaunched(appId: String) {
 //            showDonateOrUpgradeDialog()
 //        }
 //    }
-}
-
-fun Activity.showDonateOrUpgradeDialog() {
-    if (getCanAppBeUpgraded()) {
-        UpgradeToProDialog(this)
-    } else if (!isOrWasThankYouInstalled()) {
-        DonateDialog(this)
-    }
 }
 
 fun Activity.isAppInstalledOnSDCard(): Boolean = try {
@@ -411,10 +402,6 @@ fun Activity.launchUpgradeToProIntent() {
 //    }
 }
 
-fun Activity.launchMoreAppsFromUsIntent() {
-    launchViewIntent(DEVELOPER_PLAY_STORE_URL)
-}
-
 fun Activity.launchViewIntent(id: Int) = launchViewIntent(getString(id))
 
 fun Activity.launchViewIntent(url: String) {
@@ -430,15 +417,6 @@ fun Activity.launchViewIntent(url: String) {
                 showErrorToast(e)
             }
         }
-    }
-}
-
-fun Activity.launchAppRatingPage() {
-    hideKeyboard()
-    try {
-        launchViewIntent("market://details?id=${packageName.removeSuffix(".debug")}")
-    } catch (ignored: ActivityNotFoundException) {
-        launchViewIntent(getStoreUrl())
     }
 }
 
@@ -1726,20 +1704,6 @@ fun BaseSimpleActivity.getAlarmSounds(type: Int, callback: (ArrayList<AlarmSound
             showErrorToast(e)
             callback(ArrayList())
         }
-    }
-}
-
-fun BaseSimpleActivity.showModdedAppWarning() {
-    val label =
-        "You are using a fake version of the app. For your own safety " +
-                "download the original one from www.fossify.org. Thanks"
-    ConfirmationDialog(
-        activity = this,
-        message = label,
-        positive = R.string.ok,
-        negative = 0
-    ) {
-        launchViewIntent(DEVELOPER_PLAY_STORE_URL)
     }
 }
 

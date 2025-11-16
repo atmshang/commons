@@ -29,10 +29,7 @@ import org.fossify.commons.compose.screens.SocialSection
 import org.fossify.commons.compose.theme.AppThemeSurface
 import org.fossify.commons.dialogs.ConfirmationAdvancedAlertDialog
 import org.fossify.commons.extensions.baseConfig
-import org.fossify.commons.extensions.getStoreUrl
 import org.fossify.commons.extensions.isThankYouInstalled
-import org.fossify.commons.extensions.launchAppRatingPage
-import org.fossify.commons.extensions.launchMoreAppsFromUsIntent
 import org.fossify.commons.extensions.launchPurchaseThankYouIntent
 import org.fossify.commons.extensions.launchViewIntent
 import org.fossify.commons.extensions.showErrorToast
@@ -109,7 +106,7 @@ class AboutActivity : BaseComposeActivity() {
                     val (versionName, packageName) = getPackageInfo()
                     OtherSection(
                         showMoreApps = showGoogleRelations,
-                        onMoreAppsClick = ::launchMoreAppsFromUsIntent,
+                        onMoreAppsClick = {},
                         onPrivacyPolicyClick = ::onPrivacyPolicyClick,
                         onLicenseClick = ::onLicenseClick,
                         versionName = versionName,
@@ -235,13 +232,12 @@ class AboutActivity : BaseComposeActivity() {
     }
 
     private fun onRateThisAppClick() {
-        launchAppRatingPage()
     }
 
     private fun onInviteClick() {
         val storeUrl = when {
             resources.getBoolean(R.bool.hide_google_relations) -> getGithubUrl()
-            else -> getStoreUrl()
+            else -> ""
         }
 
         val text = String.format(getString(R.string.share_text), appName, storeUrl)

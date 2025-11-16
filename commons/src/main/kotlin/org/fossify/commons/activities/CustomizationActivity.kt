@@ -9,7 +9,6 @@ import org.fossify.commons.dialogs.ColorPickerDialog
 import org.fossify.commons.dialogs.ConfirmationAdvancedDialog
 import org.fossify.commons.dialogs.ConfirmationDialog
 import org.fossify.commons.dialogs.LineColorPickerDialog
-import org.fossify.commons.dialogs.PurchaseThankYouDialog
 import org.fossify.commons.dialogs.RadioGroupDialog
 import org.fossify.commons.extensions.baseConfig
 import org.fossify.commons.extensions.beVisibleIf
@@ -698,7 +697,6 @@ class CustomizationActivity : BaseSimpleActivity() {
 
             else -> {
                 binding.applyToAllSwitch.isChecked = false
-                PurchaseThankYouDialog(this)
             }
         }
     }

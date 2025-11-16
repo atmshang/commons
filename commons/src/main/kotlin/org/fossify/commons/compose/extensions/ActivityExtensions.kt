@@ -2,7 +2,6 @@ package org.fossify.commons.compose.extensions
 
 import android.app.Activity
 import android.content.ComponentName
-import android.content.Context
 import android.content.pm.PackageManager
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
@@ -13,13 +12,8 @@ import org.fossify.commons.R
 import org.fossify.commons.extensions.baseConfig
 import org.fossify.commons.extensions.checkAppIconColor
 import org.fossify.commons.extensions.getAppIconColors
-import org.fossify.commons.extensions.getCanAppBeUpgraded
 import org.fossify.commons.extensions.getInternalStoragePath
-import org.fossify.commons.extensions.isAProApp
 import org.fossify.commons.extensions.isAppInstalledOnSDCard
-import org.fossify.commons.extensions.isOrWasThankYouInstalled
-import org.fossify.commons.extensions.launchViewIntent
-import org.fossify.commons.extensions.random
 import org.fossify.commons.extensions.toggleAppIconColor
 import org.fossify.commons.extensions.updateSDCardPath
 import org.fossify.commons.helpers.isOreoMr1Plus
@@ -89,29 +83,6 @@ fun ComponentActivity.checkWhatsNewCompose(releases: List<Release>, currVersion:
     }
 
     baseConfig.lastVersion = currVersion
-}
-
-fun ComponentActivity.upgradeToPro() {
-//    launchViewIntent("https://fossify.org/upgrade_to_pro")
-}
-
-const val DEVELOPER_PLAY_STORE_URL = "https://play.google.com/store/apps/dev?id=7297838378654322558"
-const val FAKE_VERSION_APP_LABEL =
-    "You are using a fake version of the app. For your own safety download the original one from www.fossify.org. Thanks"
-
-fun Context.fakeVersionCheck(
-    showConfirmationDialog: () -> Unit
-) {
-    val allowedPrefixes = listOf(
-        "org.fossify.",
-        "cn.com.techvision.",
-        "ai.lincos."
-    )
-    if (allowedPrefixes.none { packageName.startsWith(it, true) }) {
-        if ((0..50).random() == 10 || baseConfig.appRunCount % 100 == 0) {
-            showConfirmationDialog()
-        }
-    }
 }
 
 fun ComponentActivity.appOnSdCardCheckCompose(
