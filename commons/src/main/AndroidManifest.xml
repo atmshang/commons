@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <queries>
-        <package android:name="org.fossify.thankyou.debug" />
-        <package android:name="org.fossify.thankyou" />
-    </queries>
+<!--    <queries>-->
+<!--        <package android:name="org.fossify.thankyou.debug" />-->
+<!--        <package android:name="org.fossify.thankyou" />-->
+<!--    </queries>-->
 
     <uses-feature
         android:name="android.hardware.faketouch"

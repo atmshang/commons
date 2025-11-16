@@ -49,11 +49,11 @@ class UpgradeToProDialog(val activity: Activity) {
     }
 
     private fun upgradeApp() {
-        activity.launchUpgradeToProIntent()
+//        activity.launchUpgradeToProIntent()
     }
 
     private fun moreInfo() {
-        activity.launchViewIntent("https://fossify.org/upgrade_to_pro")
+//        activity.launchViewIntent("https://fossify.org/upgrade_to_pro")
     }
 }
 

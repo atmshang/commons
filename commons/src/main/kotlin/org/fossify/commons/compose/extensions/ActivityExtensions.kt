@@ -64,15 +64,15 @@ fun ComponentActivity.appLaunchedCompose(
     }
 
     baseConfig.appRunCount++
-    if (baseConfig.appRunCount % 30 == 0 && !isAProApp()) {
-        if (!resources.getBoolean(R.bool.hide_google_relations)) {
-            if (getCanAppBeUpgraded()) {
-                showUpgradeDialog()
-            } else if (!isOrWasThankYouInstalled()) {
-                showDonateDialog()
-            }
-        }
-    }
+//    if (baseConfig.appRunCount % 30 == 0 && !isAProApp()) {
+//        if (!resources.getBoolean(R.bool.hide_google_relations)) {
+//            if (getCanAppBeUpgraded()) {
+//                showUpgradeDialog()
+//            } else if (!isOrWasThankYouInstalled()) {
+//                showDonateDialog()
+//            }
+//        }
+//    }
 }
 
 fun ComponentActivity.checkWhatsNewCompose(releases: List<Release>, currVersion: Int, showWhatsNewDialog: (List<Release>) -> Unit) {
@@ -92,7 +92,7 @@ fun ComponentActivity.checkWhatsNewCompose(releases: List<Release>, currVersion:
 }
 
 fun ComponentActivity.upgradeToPro() {
-    launchViewIntent("https://fossify.org/upgrade_to_pro")
+//    launchViewIntent("https://fossify.org/upgrade_to_pro")
 }
 
 const val DEVELOPER_PLAY_STORE_URL = "https://play.google.com/store/apps/dev?id=7297838378654322558"

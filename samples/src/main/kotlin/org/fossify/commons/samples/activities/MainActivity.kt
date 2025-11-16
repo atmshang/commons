@@ -70,7 +70,7 @@ class MainActivity : BaseSimpleActivity() {
         LaunchedEffect(Unit) {
             appLaunchedCompose(
                 appId = BuildConfig.APPLICATION_ID,
-                showDonateDialog = donateAlertDialogState::show,
+                showDonateDialog = {},
                 showUpgradeDialog = {}
             )
         }

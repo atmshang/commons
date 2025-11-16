@@ -207,7 +207,7 @@ abstract class BaseSimpleActivity : EdgeToEdgeActivity() {
         }
 
         updateRecentsAppIcon()
-        maybeLaunchAppUnlockActivity(requestCode = REQUEST_APP_UNLOCK)
+//        maybeLaunchAppUnlockActivity(requestCode = REQUEST_APP_UNLOCK)
     }
 
     override fun onDestroy() {
